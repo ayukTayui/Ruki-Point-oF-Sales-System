@@ -1,0 +1,61 @@
+<html>
+
+<head> <title>Products In Stores</title>
+    <script src="jquery-3.4.1.js"></script>
+
+    <script>   
+
+        function inventoryList(){
+        
+                $.getJSON("http://localhost:9595/inventoryList/getAllProducts",
+                function(abc){
+                             
+                    var tr=[];
+                    
+                    for (var i = 0; i < abc.length; i++) {
+                      
+                            tr.push('<tr>');
+                            tr.push('<td>' + abc[i].productBarcode + '</td>');		
+                            tr.push('<td>' + abc[i].name + '</td>');
+                            tr.push('<td>' + abc[i].type + '</td>');
+                            tr.push('<td>' + " R  "+ abc[i].price + '</td>');
+                            tr.push('<td>' + abc[i].quantity+ '</td>');
+                            tr.push('<td>' + abc[i].expiryDate+ '</td>');
+                            tr.push('<td>' + abc[i].prodDate+ '</td>');
+                            tr.push('</tr>');
+                           
+                    };
+                                   //tr.push('<td><button class=\'edit\'>Edit</button>&nbsp;&nbsp;<button class=\'delete\' id=' + json[i].id + '>Delete</button></td>');
+ 
+                        $('table').append($(tr.join('')));
+                        
+                    });
+      
+                }
+        </script>
+
+</head>
+<body>
+    <br/><br/>
+<center>
+    <button type="submit" onclick="return inventoryList()">All Products In The Inventory On Sale</button>
+    <br/><br/>
+    <div align="center">
+        <table border="5" cellspacing="10" cellpadding="20" id="demo">
+            <tr>
+                <th>Product Barcode</th>
+                <th>Product Name</th>
+                <th>Product Type</th>
+                <th>Product Price</th>
+                <th>Product Quantity</th>
+                <th>Product Expiry Date</th>
+                <th>Product Produced Date</th>
+                
+            </tr>
+        </table>
+    </div>
+    <div>
+        <a href="/index.html">Back To Welcome Page</a>
+    </div>
+</center>
+</body>

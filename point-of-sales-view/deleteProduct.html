@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>delete</title>
+    <script src="jquery-3.4.1.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <script>
+
+function deleteProduct() {
+            console.log("in");
+            var barcode = document.getElementById("barcode").value;
+           
+            $.ajax({
+        url: 'http://localhost:9595/productDelete/deleteProduct/' + barcode,
+        dataType: 'json',
+        type: 'delete',
+        contentType: 'application/json',
+        data: JSON.stringify(barcode                ),
+        success: function (data, textStatus, jQxhr) {
+            name = $("#name").val('');
+         type = $(" type").val('');
+          console.log(data);
+        },
+        error: function (jqXhr, textStatus, errorThrown) {
+          console.log(errorThrown);
+        }
+      });
+
+
+        }
+    </script>
+
+</head>
+
+<body>
+    <br /><br />
+    <div class="form">
+        <h4>... Delete Product From Inventory ...</h4>
+        
+        <input type="number"  id="barcode" placeholder="Product Barcode"/><br />
+        <button type="submit" onclick="return deleteProduct()"> ... Delete Product ...</button>
+    </div>
+        <div align="center">
+            <a href="inventoryList.html">View Products In The Inventory</a><br />
+        </div>
+</body>
+
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Product Sales</title>
+    <script src="jquery-3.4.1.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <script>
+function sellProduct() {
+            var code = document.getElementById("code").value;
+            var qty = document.getElementById("qty").value;
+            
+            var sale = {
+                 code : code,
+                 qty : qty
+            }
+            
+            $.ajax({
+        url: 'http://localhost:9595/sale/sellProduct',
+        dataType: 'json',
+        type: 'put',
+        contentType: 'application/json',
+        data: JSON.stringify(sale),
+        success: function (data, textStatus, jQxhr) {
+            name = $("#name").val('');
+         type = $(" type").val('');
+          console.log(data);
+          var tr = [];
+                        tr.push('<tr>');
+                        tr.push('<td>' + data.reciptId + '</td>');
+                        tr.push('<td>' + data.productName + '</td>');
+                        tr.push('<td>' + data.price + '</td>');
+                        tr.push('<td>' + data.quantity + '</td>');
+                        tr.push('<td>' + data.grandPrice + '</td>');
+                        tr.push('</tr>');
+
+                    $('table').append($(tr.join('')));
+
+                
+        },
+        error: function (jqXhr, textStatus, errorThrown) {
+          console.log(errorThrown);
+        }
+      });
+      
+           
+        }
+    </script>
+
+</head>
+
+<body>
+    <br /><br />
+    <div class="form">
+        <h4>... Product Sales ...</h4>
+        
+        <input type="number"  id="code" placeholder="Product Barcode"/><br />
+        <input type="number"  id="qty" placeholder="Product Quantity"/><br />
+        <button type="submit" onclick="return sellProduct()"> ... Sell Product ...</button>
+    </div>
+        <br />
+        <div align="center">
+            <table border="5" cellspacing="10" cellpadding="20" id="demo">
+                <tr>
+                    <th>Receipt Code</th>
+                    <th>Product Name</th>
+                    <th>Product Price</th>
+                    <th>Product Quantity</th>
+                    <th>Grand Total</th>
+                </tr>
+            </table>
+        </div>
+        <div align="center">
+            <a href="/purchase.html">Next Purchase</a>
+        </div>
+        <div align="center">
+            <a href="inventoryList.html">View Products In The Inventory</a><br />
+        </div>
+</body>
+
+</html>

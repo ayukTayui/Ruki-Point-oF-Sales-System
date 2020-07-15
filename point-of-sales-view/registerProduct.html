@@ -1,0 +1,96 @@
+<html lang="eng">
+
+<head>
+    <title>Product Registration</title>
+    <script src="jquery-3.4.1.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <script>
+        function registerProduct() {
+            console.log("in");
+            var name = document.getElementById("name").value;
+            var type = document.getElementById( "type").value;
+            var price = document.getElementById("price").value;
+            var quantity = document.getElementById("quantity").value;
+            var expiryDate = document.getElementById("expiryDate").value;
+            var prodDate = document.getElementById("prodDate").value;
+      
+            var product = {
+
+             name : name,
+             type : type,
+             price : price,
+             quantity : quantity,
+             expiryDate : expiryDate,
+             prodDate : prodDate,
+             
+            }
+
+
+            $.ajax({
+        url: 'http://localhost:9595/register/addProduct',
+        dataType: 'json',
+        type: 'post',
+        contentType: 'application/json',
+        data: JSON.stringify(product),
+        success: function (data, textStatus, jQxhr) {
+            name = $("#name").val('');
+         type = $(" type").val('');
+          console.log(data);
+          var tr = [];
+                        tr.push('<tr>');
+                        tr.push('<td>' + data.productBarcode + '</td>');
+                        tr.push('<td>' + data.name + '</td>');
+                        tr.push('<td>' + data.type + '</td>');
+                        tr.push('<td>' + data.price + '</td>');
+                        tr.push('<td>' + data.quantity + '</td>');
+                        tr.push('<td>' + data.expiryDate + '</td>');
+                        tr.push('<td>' + data.prodDate + '</td>');
+                        
+                        tr.push('</tr>');
+
+                    $('table').append($(tr.join('')));
+        },
+        error: function (jqXhr, textStatus, errorThrown) {
+          console.log(errorThrown);
+        }
+      });
+
+
+        }
+    </script>
+</head>
+
+<body>
+    <br />
+    <div class="form">
+        <H4>... Product  Registration Form ...</H4>
+        <form >
+            <input type="text" id="name"  placeholder="Name"/><br />
+            <input type="text" id= "type" placeholder= "Product Type" /> <br />
+            <input type="number" id="price" placeholder="Product Price"/> <br/>
+            <input type="number" id="quantity" placeholder="Product Quantity"/> <br/>
+            <input type="date" id="expiryDate" placeholder="Expiry Date"/><br />
+            <input type="date" id="prodDate" placeholder="Product Date"/><br />
+            <button type="button" onclick="return registerProduct()">Register Product </button>
+        </form>
+       
+    </div>
+</div>
+<div align="center">
+    <table border="5" cellspacing="10" cellpadding="20" id="demo">
+        <tr>
+            <th>Product Barcode</th>
+            <th>Product Name</th>
+            <th>Product Type</th>
+            <th>Product Price</th>
+            <th>Product Quantity</th>
+            <th>Expiry Date</th>
+            <th>Date Manufactured</th>
+        </tr>
+    </table>
+    </div>
+    <p id="demo"></p>
+
+</body>
+
+</html>
