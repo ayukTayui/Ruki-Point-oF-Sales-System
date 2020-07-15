@@ -5,10 +5,8 @@
  */
 package za.co.jtpos_system.service;
 
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import za.co.jtpos_system.entities.LoginDetail;
 import za.co.jtpos_system.entities.UserDetail;
 import za.co.jtpos_system.repositories.LoginDetailRepository;
 import za.co.jtpos_system.repositories.UserDetailRepository;

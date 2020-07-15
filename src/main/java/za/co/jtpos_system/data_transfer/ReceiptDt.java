@@ -71,9 +71,5 @@ public class ReceiptDt {
     public String toString() {
         return "ReceiptDt{" + "reciptId=" + reciptId + ", productName=" + productName + ", price=" + price + ", quantity=" + quantity + ", grandPrice=" + grandPrice + '}';
     }
-    
-    
-
-    
-    
+ 
 }
